@@ -4,17 +4,16 @@
   "author": "BitPay <dev@bitpay.com>",
   "version": "3.1.11",
   "main": "./index.js",
-  "repository": "git://github.com/216k155/luxcore-node.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/216k155/luxcore-node.git"
+  },
   "homepage": "https://github.com/216k155/luxcore-node",
   "bugs": {
     "url": "https://github.com/216k155/luxcore-node/issues"
   },
   "contributors": [
-    {
-      "name": "216k155",
-      "email": "216k155@i2pd.net"
-    }
-   
+    "216k155 <216k155@i2pd.net>"
   ],
   "bin": {
     "luxcore-node": "./bin/luxcore-node",
@@ -27,7 +26,7 @@
     "regtest": "./scripts/regtest",
     "jshint": "jshint --reporter=node_modules/jshint-stylish ./lib",
     "coverage": "istanbul cover _mocha -- --recursive",
-    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "tags": [
     "luxcoin",
@@ -49,7 +48,9 @@
     "semver": "^5.0.1",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
-    "zeromq": "^4.2.0"
+    "zeromq": "^4.2.0",
+    "bufferutil": "~1.2.1",
+    "utf-8-validate": "~1.2.1"
   },
   "optionalDependencies": {
     "bufferutil": "~1.2.1",
@@ -68,5 +69,9 @@
     "rimraf": "^2.4.2",
     "sinon": "^1.15.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
 }
