@@ -45,7 +45,7 @@ var myNode = new luxcore.Node({
   services: [
     {
       name: 'luxd',
-      module: Litecoin,
+      module: Luxcoin,
       config: {
         spawn: {
           datadir: '/home/<username>/.lux',

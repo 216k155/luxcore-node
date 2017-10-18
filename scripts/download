@@ -18,7 +18,7 @@ if [ "${platform}" == "linux" ]; then
 elif [ "${platform}" == "darwin" ]; then
     tarball_name="lux-${version}-osx64.tar.gz"
 else
-    echo "Litecoin binary distribution not available for platform and architecture"
+    echo "Luxcoin binary distribution not available for platform and architecture"
     exit -1
 fi
 
@@ -56,7 +56,7 @@ download_bitcoind() {
             fi
         fi
     fi
-    echo "Litecoin binary distribution could not be downloaded"
+    echo "Luxcoin binary distribution could not be downloaded"
     exit -1
 }
 

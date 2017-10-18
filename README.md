@@ -5,7 +5,7 @@ Luxcore Node
 [![Build Status](https://img.shields.io/travis/lux-project/luxcore-node.svg?branch=master&style=flat-square)](https://travis-ci.org/lux-project/luxcore-node)
 [![Coverage Status](https://img.shields.io/coveralls/lux-project/luxcore-node.svg?style=flat-square)](https://coveralls.io/r/lux-project/luxcore-node)
 
-A Litecoin full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Litecoin Core with additional indexing](https://github.com/lux-project/luxcore-lux) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
+A Luxcoin full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Luxcoin Core with additional indexing](https://github.com/lux-project/luxcore-lux) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
 
 ## Install
 
@@ -14,7 +14,7 @@ npm install -g luxcore-node
 luxcore-node start
 ```
 
-Note: For your convenience, we distribute bitcoind binaries for x86_64 Linux and x86_64 Mac OS X. Upon npm install, the binaries for your platform will be downloaded. For more detailed installation instructions, or if you want to compile the project yourself, then please see the Bitcore branch of [Litecoin Core with additional indexing](https://github.com/lux-project/luxcore-lux).
+Note: For your convenience, we distribute bitcoind binaries for x86_64 Linux and x86_64 Mac OS X. Upon npm install, the binaries for your platform will be downloaded. For more detailed installation instructions, or if you want to compile the project yourself, then please see the Bitcore branch of [Luxcoin Core with additional indexing](https://github.com/lux-project/luxcore-lux).
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Please send pull requests for bug fixes, code optimization, and ideas for improv
 
 Code released under [the MIT license](https://github.com/lux-project/luxcore-node/blob/master/LICENSE).
 
-Copyright 2016 The Litecoin Core Developers
+Copyright 2016 The Luxcoin Core Developers
 
 - bitcore: Copyright (c) 2013-2015 BitPay, Inc. (MIT License)
 - bitcoin: Copyright (c) 2009-2015 Bitcoin Core Developers (MIT License)
