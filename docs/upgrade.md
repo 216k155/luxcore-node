@@ -23,7 +23,7 @@ To start reindexing add `reindex=1` during the **first startup only**.
 **Before**:
 ```json
 {
-  "datadir": "/home/<username>/.lux",
+  "datadir": "/home/<username>/.luxcoin",
   "network": "livenet",
   "port": 3001,
   "services": [
@@ -45,9 +45,9 @@ To start reindexing add `reindex=1` during the **first startup only**.
     "web"
   ],
   "servicesConfig": {
-    "lux": {
+    "luxcoin": {
       "spawn": {
-        "datadir": "/home/<username>/.lux",
+        "datadir": "/home/<username>/.luxcoin",
         "exec": "/home/<username>/luxcore-node/bin/luxd"
       }
     }

@@ -224,7 +224,7 @@ body-parser@^1.13.3:
     debug "2.6.1"
     depd "~1.1.0"
     http-errors "~1.6.1"
-    iconv-lite "0.4.15"
+    iconv-lux "0.4.15"
     on-finished "~2.3.0"
     qs "6.4.0"
     raw-body "~2.2.0"
@@ -1200,9 +1200,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-iconv-lite@0.4.15:
+iconv-lux@0.4.15:
   version "0.4.15"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
+  resolved "https://registry.yarnpkg.com/iconv-lux/-/iconv-lux-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
 
 iferr@^0.1.5:
   version "0.1.5"
@@ -1526,9 +1526,9 @@ luxcore-lib@^0.13.19:
     lodash "=3.10.1"
     scryptsy "=2.0.0"
 
-"luxcore-p2p@git://github.com/lux-project/luxcore-p2p#427dba833970d656a47dba12983c9d972a478191":
+"luxcore-p2p@git://github.com/216k155/luxcore-p2p#427dba833970d656a47dba12983c9d972a478191":
   version "1.1.1"
-  resolved "git://github.com/lux-project/luxcore-p2p#427dba833970d656a47dba12983c9d972a478191"
+  resolved "git://github.com/216k155/luxcore-p2p#427dba833970d656a47dba12983c9d972a478191"
   dependencies:
     bloom-filter "^0.2.0"
     buffers bitpay/node-buffers#v0.1.2-bitpay
@@ -2158,7 +2158,7 @@ raw-body@~2.2.0:
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.2.0.tgz#994976cf6a5096a41162840492f0bdc5d6e7fb96"
   dependencies:
     bytes "2.4.0"
-    iconv-lite "0.4.15"
+    iconv-lux "0.4.15"
     unpipe "1.0.0"
 
 read-installed@~4.0.3:

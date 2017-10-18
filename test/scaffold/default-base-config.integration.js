@@ -14,7 +14,7 @@ describe('#defaultBaseConfig', function() {
     info.config.port.should.equal(3001);
     info.config.services.should.deep.equal(['bitcoind', 'web']);
     var bitcoind = info.config.servicesConfig.bitcoind;
-    bitcoind.spawn.datadir.should.equal(home + '/.lux');
+    bitcoind.spawn.datadir.should.equal(home + '/.luxcoin');
     bitcoind.spawn.exec.should.equal(path.resolve(__dirname, '../../bin/luxd'));
   });
   it('be able to specify a network', function() {

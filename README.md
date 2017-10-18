@@ -2,10 +2,10 @@ Luxcore Node
 ============
 
 [![NPM Package](https://img.shields.io/npm/v/luxcore-node.svg?style=flat-square)](https://www.npmjs.org/package/luxcore-node)
-[![Build Status](https://img.shields.io/travis/lux-project/luxcore-node.svg?branch=master&style=flat-square)](https://travis-ci.org/lux-project/luxcore-node)
-[![Coverage Status](https://img.shields.io/coveralls/lux-project/luxcore-node.svg?style=flat-square)](https://coveralls.io/r/lux-project/luxcore-node)
+[![Build Status](https://img.shields.io/travis/216k155/luxcore-node.svg?branch=master&style=flat-square)](https://travis-ci.org/216k155/luxcore-node)
+[![Coverage Status](https://img.shields.io/coveralls/216k155/luxcore-node.svg?style=flat-square)](https://coveralls.io/r/216k155/luxcore-node)
 
-A Luxcoin full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Luxcoin Core with additional indexing](https://github.com/lux-project/luxcore-lux) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
+A Luxcoin full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Luxcoin Core with additional indexing](https://github.com/216k155/luxcore-luxcoin) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
 
 ## Install
 
@@ -14,7 +14,7 @@ npm install -g luxcore-node
 luxcore-node start
 ```
 
-Note: For your convenience, we distribute bitcoind binaries for x86_64 Linux and x86_64 Mac OS X. Upon npm install, the binaries for your platform will be downloaded. For more detailed installation instructions, or if you want to compile the project yourself, then please see the Bitcore branch of [Luxcoin Core with additional indexing](https://github.com/lux-project/luxcore-lux).
+Note: For your convenience, we distribute bitcoind binaries for x86_64 Linux and x86_64 Mac OS X. Upon npm install, the binaries for your platform will be downloaded. For more detailed installation instructions, or if you want to compile the project yourself, then please see the Bitcore branch of [Luxcoin Core with additional indexing](https://github.com/216k155/luxcore-luxcoin).
 
 ## Prerequisites
 
@@ -58,11 +58,11 @@ There are several add-on services available to extend the functionality of Bitco
 
 ## Contributing
 
-Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/lux-project/luxcore/blob/master/CONTRIBUTING.md) file.
+Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/216k155/luxcore/blob/master/CONTRIBUTING.md) file.
 
 ## License
 
-Code released under [the MIT license](https://github.com/lux-project/luxcore-node/blob/master/LICENSE).
+Code released under [the MIT license](https://github.com/216k155/luxcore-node/blob/master/LICENSE).
 
 Copyright 2016 The Luxcoin Core Developers
 

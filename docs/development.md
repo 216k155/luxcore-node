@@ -18,14 +18,14 @@ git clone git@github.com:<yourusername>/luxcore-node.git
 git clone git@github.com:<yourusername>/luxcore-lib.git
 ```
 
-To develop lux or to compile from source:
+To develop luxcoin or to compile from source:
 
 ```bash
-git clone git@github.com:<yourusername>/lux.git
+git clone git@github.com:<yourusername>/luxcoin.git
 git fetch origin <branchname>:<branchname>
 git checkout <branchname>
 ```
-**Note**: See lux documentation for building lux on your platform.
+**Note**: See luxcoin documentation for building luxcoin on your platform.
 
 
 ## Install Development Dependencies
@@ -51,7 +51,7 @@ npm install
 cd ../luxcore-node
 npm install
 ```
-**Note**: If you get a message about not being able to download lux distribution, you'll need to compile luxd from source, and setup your configuration to use that version.
+**Note**: If you get a message about not being able to download luxcoin distribution, you'll need to compile luxd from source, and setup your configuration to use that version.
 
 
 We now will setup symlinks in `luxcore-node` *(repeat this for any other modules you're planning on developing)*:
@@ -63,10 +63,10 @@ rm -rf bitcoind-rpc
 ln -s ~/bitcoind-rpc
 ```
 
-And if you're compiling or developing lux:
+And if you're compiling or developing luxcoin:
 ```bash
 cd ../bin
-ln -sf ~/lux/src/luxd
+ln -sf ~/luxcoin/src/luxd
 ```
 
 ## Run Tests
@@ -121,8 +121,8 @@ Edit `luxcore-node.json` with something similar to:
   "servicesConfig": {
     "luxd": {
       "spawn": {
-        "datadir": "/home/<youruser>/.lux",
-        "exec": "/home/<youruser>/lux/src/luxd"
+        "datadir": "/home/<youruser>/.luxcoin",
+        "exec": "/home/<youruser>/luxcoin/src/luxd"
       }
     }
   }
@@ -141,7 +141,7 @@ ln -s ~/insight-api
 ln -s ~/insight-ui
 ```
 
-Make sure that the `<datadir>/lux.conf` has the necessary settings, for example:
+Make sure that the `<datadir>/luxcoin.conf` has the necessary settings, for example:
 ```
 server=1
 whitelist=127.0.0.1
@@ -152,7 +152,7 @@ spentindex=1
 zmqpubrawtx=tcp://127.0.0.1:29332
 zmqpubhashblock=tcp://127.0.0.1:29332
 rpcallowip=127.0.0.1
-rpcuser=lux
+rpcuser=luxcoin
 rpcpassword=local321
 ```
 
