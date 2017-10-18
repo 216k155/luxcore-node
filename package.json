@@ -2,7 +2,7 @@
   "name": "luxcore-node",
   "description": "Full node with extended capabilities using Luxcore and Luxcoin Core",
   "author": "BitPay <dev@bitpay.com>",
-  "version": "3.1.11",
+  "version": "1.0.0",
   "main": "./index.js",
   "repository": {
     "type": "git",
