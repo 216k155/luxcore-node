@@ -20,8 +20,6 @@
     "luxd": "./bin/luxd"
   },
   "scripts": {
-    "preinstall": "./scripts/download",
-    "verify": "./scripts/download --skip-bitcoin-download --verify-bitcoin-download",
     "test": "mocha -R spec --recursive",
     "regtest": "./scripts/regtest",
     "jshint": "jshint --reporter=node_modules/jshint-stylish ./lib",
@@ -41,7 +39,7 @@
     "express": "^4.13.3",
     "liftoff": "^2.2.0",
     "luxd-rpc": "^0.7.1",
-    "luxcore-lib": "^0.13.22",
+    "luxcore-lib": "216k155/bitcore-lib",
     "lru-cache": "^4.0.1",
     "mkdirp": "0.5.0",
     "path-is-absolute": "^1.0.0",
