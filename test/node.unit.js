@@ -2,15 +2,15 @@
 
 var should = require('chai').should();
 var sinon = require('sinon');
-var bitcore = require('luxcore-lib');
-var Networks = bitcore.Networks;
+var luxcore = require('luxcore-lib');
+var Networks = luxcore.Networks;
 var proxyquire = require('proxyquire');
 var util = require('util');
 var BaseService = require('../lib/service');
 var index = require('../lib');
 var log = index.log;
 
-describe('Bitcore Node', function() {
+describe('Luxcore Node', function() {
 
   var baseConfig = {};
 
@@ -425,7 +425,7 @@ describe('Bitcore Node', function() {
 
   describe('#getNetworkName', function() {
     afterEach(function() {
-      bitcore.Networks.disableRegtest();
+      luxcore.Networks.disableRegtest();
     });
     it('it will return the network name for livenet', function() {
       var node = new Node(baseConfig);

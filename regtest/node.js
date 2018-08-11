@@ -48,7 +48,7 @@ describe('Node Functionality', function() {
         network: 'regtest',
         services: [
           {
-            name: 'bitcoind',
+            name: 'luxd',
             module: BitcoinService,
             config: {
               spawn: {
@@ -84,13 +84,13 @@ describe('Node Functionality', function() {
         });
 
         var syncedHandler = function() {
-          if (node.services.bitcoind.height === 150) {
-            node.services.bitcoind.removeListener('synced', syncedHandler);
+          if (node.services.luxd.height === 150) {
+            node.services.luxd.removeListener('synced', syncedHandler);
             done();
           }
         };
 
-        node.services.bitcoind.on('synced', syncedHandler);
+        node.services.luxd.on('synced', syncedHandler);
 
         client.generate(150, function(err) {
           if (err) {
@@ -119,9 +119,9 @@ describe('Node Functionality', function() {
       var bus = node.openBus();
       var blockExpected;
       var blockReceived;
-      bus.subscribe('bitcoind/hashblock');
-      bus.on('bitcoind/hashblock', function(data) {
-        bus.unsubscribe('bitcoind/hashblock');
+      bus.subscribe('luxd/hashblock');
+      bus.on('luxd/hashblock', function(data) {
+        bus.unsubscribe('luxd/hashblock');
         if (blockExpected) {
           data.should.be.equal(blockExpected);
           done();
@@ -149,8 +149,8 @@ describe('Node Functionality', function() {
     before(function(done) {
       this.timeout(10000);
       address = testKey.toAddress(regtest).toString();
-      var startHeight = node.services.bitcoind.height;
-      node.services.bitcoind.on('tip', function(height) {
+      var startHeight = node.services.luxd.height;
+      node.services.luxd.on('tip', function(height) {
         if (height === startHeight + 3) {
           done();
         }
@@ -205,7 +205,7 @@ describe('Node Functionality', function() {
         info.satoshis.should.equal(10 * 1e8);
         info.confirmations.should.equal(3);
         info.tx.blockTimestamp.should.be.a('number');
-        info.tx.feeSatoshis.should.be.within(9500, 40000); // TODO: Not sure how the fee is calculated in luxd, start at rpcwallet.cpp sendtoaddress()
+        info.tx.feeSatoshis.should.be.within(950, 4000);
         done();
       });
     });
@@ -248,8 +248,8 @@ describe('Node Functionality', function() {
         /* jshint maxstatements: 50 */
 
         // Finished once all blocks have been mined
-        var startHeight = node.services.bitcoind.height;
-        node.services.bitcoind.on('tip', function(height) {
+        var startHeight = node.services.luxd.height;
+        node.services.luxd.on('tip', function(height) {
           if (height === startHeight + 5) {
             done();
           }
@@ -276,7 +276,7 @@ describe('Node Functionality', function() {
         tx.to(address, 2 * 1e8);
         tx.to(address, 0.5 * 1e8);
         tx.to(address, 3 * 1e8);
-        tx.fee(100000);
+        tx.fee(10000);
         tx.change(address);
         tx.sign(testKey);
 
@@ -313,7 +313,7 @@ describe('Node Functionality', function() {
               async.series([
                 function(next) {
                   var tx2 = new Transaction();
-                  tx2Amount = results[0].satoshis - 100000;
+                  tx2Amount = results[0].satoshis - 10000;
                   tx2.from(results[0]);
                   tx2.to(address2, tx2Amount);
                   tx2.change(address);
@@ -328,7 +328,7 @@ describe('Node Functionality', function() {
                 }, function(next) {
                   var tx3 = new Transaction();
                   tx3.from(results[1]);
-                  tx3.to(address3, results[1].satoshis - 100000);
+                  tx3.to(address3, results[1].satoshis - 10000);
                   tx3.change(address);
                   tx3.sign(testKey);
                   node.sendTransaction(tx3.serialize(), function(err) {
@@ -340,7 +340,7 @@ describe('Node Functionality', function() {
                 }, function(next) {
                   var tx4 = new Transaction();
                   tx4.from(results[2]);
-                  tx4.to(address4, results[2].satoshis - 100000);
+                  tx4.to(address4, results[2].satoshis - 10000);
                   tx4.change(address);
                   tx4.sign(testKey);
                   node.sendTransaction(tx4.serialize(), function(err) {
@@ -353,8 +353,8 @@ describe('Node Functionality', function() {
                   var tx5 = new Transaction();
                   tx5.from(results[3]);
                   tx5.from(results[4]);
-                  tx5.to(address5, results[3].satoshis - 100000);
-                  tx5.to(address6, results[4].satoshis - 100000);
+                  tx5.to(address5, results[3].satoshis - 10000);
+                  tx5.to(address6, results[4].satoshis - 10000);
                   tx5.change(address);
                   tx5.sign(testKey);
                   node.sendTransaction(tx5.serialize(), function(err) {
@@ -507,7 +507,7 @@ describe('Node Functionality', function() {
           history[2].tx.height.should.equal(157);
           history[3].tx.height.should.equal(156);
           history[4].tx.height.should.equal(155);
-          history[4].satoshis.should.equal(-100000);
+          history[4].satoshis.should.equal(-10000);
           history[4].addresses[address].outputIndexes.should.deep.equal([0, 1, 2, 3, 4]);
           history[4].addresses[address].inputIndexes.should.deep.equal([0]);
           history[5].tx.height.should.equal(152);
@@ -522,8 +522,8 @@ describe('Node Functionality', function() {
             throw err;
           }
           results.totalReceived.should.equal(2000000000);
-          results.totalSpent.should.equal(1999900000);
-          results.balance.should.equal(100000);
+          results.totalSpent.should.equal(1999990000);
+          results.balance.should.equal(10000);
           results.unconfirmedBalance.should.equal(0);
           results.appearances.should.equal(6);
           results.unconfirmedAppearances.should.equal(0);
@@ -620,7 +620,7 @@ describe('Node Functionality', function() {
             var history = results.items;
             history.length.should.equal(1);
             history[0].tx.height.should.equal(155);
-            history[0].satoshis.should.equal(-100000);
+            history[0].satoshis.should.equal(-10000);
             history[0].addresses[address].outputIndexes.should.deep.equal([0, 1, 2, 3, 4]);
             history[0].addresses[address].inputIndexes.should.deep.equal([0]);
             done();
@@ -663,11 +663,11 @@ describe('Node Functionality', function() {
         var memAddress = bitcore.PrivateKey().toAddress(node.network).toString();
         var tx = new Transaction();
         tx.from(unspentOutput);
-        tx.to(memAddress, unspentOutput.satoshis - 40000); // TODO: only 90000 satoshis available, better fee?
-        tx.fee(40000);
+        tx.to(memAddress, unspentOutput.satoshis - 1000);
+        tx.fee(1000);
         tx.sign(testKey);
 
-        node.services.bitcoind.sendTransaction(tx.serialize(), function(err, hash) {
+        node.services.luxd.sendTransaction(tx.serialize(), function(err, hash) {
           node.getAddressTxids(memAddress, {}, function(err, txids) {
             if (err) {
               return done(err);

@@ -3,7 +3,7 @@
 var should = require('chai').should();
 var sinon = require('sinon');
 var proxyquire = require('proxyquire');
-var BitcoinService = require('../../lib/services/bitcoind');
+var LuxService = require('../../lib/services/luxd');
 var index = require('../../lib');
 var log = index.log;
 
@@ -23,8 +23,8 @@ describe('#start', function() {
       var node;
       var TestNode = function(options) {
         options.services[0].should.deep.equal({
-          name: 'bitcoind',
-          module: BitcoinService,
+          name: 'luxd',
+          module: LuxService,
           config: {
             spawn: {
               datadir: './data'
@@ -48,10 +48,10 @@ describe('#start', function() {
         path: __dirname,
         config: {
           services: [
-            'bitcoind'
+            'luxd'
           ],
           servicesConfig: {
-            bitcoind: {
+            luxd: {
               spawn: {
                 datadir: './data'
               }
@@ -91,8 +91,8 @@ describe('#start', function() {
       var node;
       var TestNode = function(options) {
         options.services[0].should.deep.equal({
-          name: 'bitcoind',
-          module: BitcoinService,
+          name: 'luxd',
+          module: LuxService,
           config: {
             param: 'test',
             spawn: {
@@ -116,10 +116,10 @@ describe('#start', function() {
         path: __dirname,
         config: {
           services: [
-            'bitcoind'
+            'luxd'
           ],
           servicesConfig: {
-            'bitcoind': {
+            'luxd': {
               param: 'test',
               spawn: {
                 datadir: './data'

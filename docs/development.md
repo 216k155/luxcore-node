@@ -18,14 +18,14 @@ git clone git@github.com:<yourusername>/luxcore-node.git
 git clone git@github.com:<yourusername>/luxcore-lib.git
 ```
 
-To develop luxcoin or to compile from source:
+To develop lux or to compile from source:
 
 ```bash
 git clone git@github.com:<yourusername>/luxcoin.git
 git fetch origin <branchname>:<branchname>
 git checkout <branchname>
 ```
-**Note**: See luxcoin documentation for building luxcoin on your platform.
+**Note**: See lux documentation for building lux on your platform.
 
 
 ## Install Development Dependencies
@@ -46,12 +46,12 @@ brew install zeromq
 ## Install and Symlink
 
 ```bash
-cd luxcore-lib
+cd bitcore-lib
 npm install
-cd ../luxcore-node
+cd ../bitcore-node
 npm install
 ```
-**Note**: If you get a message about not being able to download luxcoin distribution, you'll need to compile luxd from source, and setup your configuration to use that version.
+**Note**: If you get a message about not being able to download lux distribution, you'll need to compile luxd from source, and setup your configuration to use that version.
 
 
 We now will setup symlinks in `luxcore-node` *(repeat this for any other modules you're planning on developing)*:
@@ -59,14 +59,14 @@ We now will setup symlinks in `luxcore-node` *(repeat this for any other modules
 cd node_modules
 rm -rf luxcore-lib
 ln -s ~/luxcore-lib
-rm -rf bitcoind-rpc
-ln -s ~/bitcoind-rpc
+rm -rf luxd-rpc
+ln -s ~/luxd-rpc
 ```
 
 And if you're compiling or developing luxcoin:
 ```bash
 cd ../bin
-ln -sf ~/luxcoin/src/luxd
+ln -sf ~/lux/src/luxd
 ```
 
 ## Run Tests
@@ -85,12 +85,12 @@ npm run test
 
 To run a specific unit test in watch mode:
 ```bash
-mocha -w -R spec test/services/bitcoind.unit.js
+mocha -w -R spec test/services/luxd.unit.js
 ```
 
 To run a specific regtest:
 ```bash
-mocha -R spec regtest/bitcoind.js
+mocha -R spec regtest/luxd.js
 ```
 
 ## Running a Development Node
@@ -121,15 +121,15 @@ Edit `luxcore-node.json` with something similar to:
   "servicesConfig": {
     "luxd": {
       "spawn": {
-        "datadir": "/home/<youruser>/.luxcoin",
-        "exec": "/home/<youruser>/luxcoin/src/luxd"
+        "datadir": "/home/<youruser>/.lux",
+        "exec": "/home/<youruser>/lux/src/luxd"
       }
     }
   }
 }
 ```
 
-**Note**: To install services [insight-api](https://github.com/bitpay/insight-api) and [insight-ui](https://github.com/bitpay/insight-ui) you'll need to clone the repositories locally.
+**Note**: To install services [lux-insight-api](https://github.com/216k155/insight-api) and [lux-explorer](https://github.com/216k155/lux-explorer) you'll need to clone the repositories locally.
 
 Setup symlinks for all of the services and dependencies:
 
@@ -137,11 +137,11 @@ Setup symlinks for all of the services and dependencies:
 cd node_modules
 ln -s ~/luxcore-lib
 ln -s ~/luxcore-node
-ln -s ~/insight-api
-ln -s ~/insight-ui
+ln -s ~/lux-insight-api
+ln -s ~/lux-explorer
 ```
 
-Make sure that the `<datadir>/luxcoin.conf` has the necessary settings, for example:
+Make sure that the `<datadir>/lux.conf` has the necessary settings, for example:
 ```
 server=1
 whitelist=127.0.0.1
@@ -149,11 +149,16 @@ txindex=1
 addressindex=1
 timestampindex=1
 spentindex=1
-zmqpubrawtx=tcp://127.0.0.1:29332
-zmqpubhashblock=tcp://127.0.0.1:29332
+zmqpubrawtx=tcp://127.0.0.1:28332
+zmqpubhashblock=tcp://127.0.0.1:28332
 rpcallowip=127.0.0.1
-rpcuser=luxcoin
-rpcpassword=local321
+rpcuser=user
+rpcpassword=password
+rpcport=9888
+reindex=1
+gen=0
+addrindex=1
+logevents=1
 ```
 
 From within the `devnode` directory with the configuration file, start the node:

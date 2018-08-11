@@ -6,7 +6,7 @@ var path = require('path');
 var index = require('..');
 var log = index.log;
 
-var p2p = require('luxcore-p2p');
+var p2p = require('bitcore-p2p');
 var Peer = p2p.Peer;
 var Messages = p2p.Messages;
 var chai = require('chai');
@@ -15,7 +15,7 @@ var Transaction = bitcore.Transaction;
 var BN = bitcore.crypto.BN;
 var async = require('async');
 var rimraf = require('rimraf');
-var bitcoind;
+var luxd;
 
 /* jshint unused: false */
 var should = chai.should();
@@ -49,7 +49,7 @@ describe('P2P Functionality', function() {
         throw err;
       }
 
-      bitcoind = require('../').services.Bitcoin({
+      luxd = require('../').services.Bitcoin({
         spawn: {
           datadir: datadir,
           exec: path.resolve(__dirname, '../bin/luxd')
@@ -59,13 +59,13 @@ describe('P2P Functionality', function() {
         }
       });
 
-      bitcoind.on('error', function(err) {
+      luxd.on('error', function(err) {
         log.error('error="%s"', err.message);
       });
 
       log.info('Waiting for Bitcoin Core to initialize...');
 
-      bitcoind.start(function(err) {
+      luxd.start(function(err) {
         if (err) {
           throw err;
         }
@@ -82,7 +82,7 @@ describe('P2P Functionality', function() {
 
         peer = new Peer({
           host: '127.0.0.1',
-          // port: regtestNetwork.port, // regtestNetwork will provide the port: 19444
+          port: '18444',
           network: regtestNetwork
         });
 
@@ -133,7 +133,7 @@ describe('P2P Functionality', function() {
                       var tx = bitcore.Transaction();
                       tx.from(utxo);
                       tx.change(privateKey.toAddress());
-                      tx.to(destKey.toAddress(), utxo.amount * 1e8 - 100000);
+                      tx.to(destKey.toAddress(), utxo.amount * 1e8 - 1000);
                       tx.sign(bitcore.PrivateKey.fromWIF(utxo.privateKeyWIF));
                       txs.push(tx);
                       finished();
@@ -163,8 +163,8 @@ describe('P2P Functionality', function() {
     this.timeout(20000);
     peer.on('disconnect', function() {
       log.info('Peer disconnected');
-      bitcoind.node.stopping = true;
-      bitcoind.stop(function(err, result) {
+      luxd.node.stopping = true;
+      luxd.stop(function(err, result) {
         done();
       });
     });
@@ -176,7 +176,7 @@ describe('P2P Functionality', function() {
 
     var usedTxs = {};
 
-    bitcoind.on('tx', function(buffer) {
+    luxd.on('tx', function(buffer) {
       var txFromResult = new Transaction().fromBuffer(buffer);
       var tx = usedTxs[txFromResult.id];
       should.exist(tx);

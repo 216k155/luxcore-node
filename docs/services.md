@@ -1,5 +1,5 @@
 # Services
-Bitcore Node has a service module system that can start up additional services that can include additional:
+luxcore Node has a service module system that can start up additional services that can include additional:
 - Blockchain indexes (e.g. querying balances for addresses)
 - API methods
 - HTTP routes
@@ -10,7 +10,7 @@ The `luxcore-node.json` file describes which services will load for a node:
 ```json
 {
   "services": [
-    "bitcoind", "web"
+    "luxd", "web"
   ]
 }
 ```
@@ -20,9 +20,9 @@ Services correspond with a Node.js module as described in 'package.json', for ex
 ```json
 {
   "dependencies": {
-    "luxcore-lib": "^0.1.0",
-    "luxcore-node": "^0.2.0",
-    "insight-api": "^3.0.0"
+    "luxcore-lib": "^0.0.1",
+    "luxcore-node": "^0.0.1",
+    "lux-insight-api": "^0.0.1"
   }
 }
 ```
@@ -37,18 +37,18 @@ If, instead, you would like to run a custom node, you can include services by in
 var luxcore = require('luxcore-node');
 
 //Services
-var Bitcoin = luxcore.services.Bitcoin;
+var Lux = luxcore.services.Lux;
 var Web = luxcore.services.Web;
 
 var myNode = new luxcore.Node({
-  network: 'regtest'
+  network: 'regtest',
   services: [
     {
       name: 'luxd',
-      module: Luxcoin,
+      module: Lux,
       config: {
         spawn: {
-          datadir: '/home/<username>/.luxcoin',
+          datadir: '/home/<username>/.lux',
           exec: '/home/<username>/luxcore-node/bin/luxd'
         }
       }
@@ -67,7 +67,7 @@ var myNode = new luxcore.Node({
 Now that you've loaded your services you can access them via `myNode.services.<service-name>.<method-name>`. For example if you wanted to check the balance of an address, you could access the address service like so.
 
 ```js
-myNode.services.bitcoind.getAddressBalance('1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v', false, function(err, total) {
+myNode.services.luxd.getAddressBalance('1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v', false, function(err, total) {
   console.log(total.balance); //Satoshi amount of this address
 });
 ```

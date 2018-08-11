@@ -33,7 +33,7 @@ describe('#create', function() {
       if (err) {
         throw err;
       }
-      mkdirp(testDir + '/.luxcoin', function(err) {
+      mkdirp(testDir + '/.lux', function(err) {
         if (err) {
           throw err;
         }
@@ -71,7 +71,7 @@ describe('#create', function() {
       should.equal(fs.existsSync(packagePath), true);
 
       var config = JSON.parse(fs.readFileSync(configPath));
-      config.services.should.deep.equal(['bitcoind', 'db', 'address', 'web']);
+      config.services.should.deep.equal(['luxd', 'db', 'address', 'web']);
       config.datadir.should.equal('./data');
       config.network.should.equal('livenet');
 
@@ -104,7 +104,7 @@ describe('#create', function() {
       dirname: 'mynode3',
       name: 'My Node 3',
       isGlobal: true,
-      datadir: '../.luxcoin'
+      datadir: '../.lux'
     }, function(err) {
       if (err) {
         throw err;
@@ -139,7 +139,7 @@ describe('#create', function() {
       dirname: 'mynode4',
       name: 'My Node 4',
       isGlobal: false,
-      datadir: '../.luxcoin'
+      datadir: '../.lux'
     }, function(err) {
       should.exist(err);
       err.message.should.equal('There was an error installing dependencies.');

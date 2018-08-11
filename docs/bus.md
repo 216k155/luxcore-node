@@ -1,5 +1,5 @@
 # Bus
-The bus provides a way to subscribe to events from any of the services running. It's implemented abstract from transport specific implementation. The primary use of the bus in Bitcore Node is for subscribing to events via a web socket.
+The bus provides a way to subscribe to events from any of the services running. It's implemented abstract from transport specific implementation. The primary use of the bus in Luxcore Node is for subscribing to events via a web socket.
 
 ## Opening/Closing
 
@@ -20,11 +20,11 @@ bus.close();
 ```javascript
 
 // subscribe to all transaction events
-bus.subscribe('bitcoind/rawtransaction');
+bus.subscribe('luxd/rawtransaction');
 
 // to subscribe to new block hashes
-bus.subscribe('bitcoind/hashblock');
+bus.subscribe('luxd/hashblock');
 
 // unsubscribe
-bus.unsubscribe('bitcoind/rawtransaction');
+bus.unsubscribe('luxd/rawtransaction');
 ```

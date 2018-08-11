@@ -79,7 +79,7 @@ describe('#add', function() {
           spawn: spawn
         }
       });
-
+      
       addtest({
         path: path.resolve(testDir, 's0/s1/'),
         services: ['a', 'b', 'c']
@@ -94,7 +94,7 @@ describe('#add', function() {
       var callCount = 0;
       var oldPackage = {
         dependencies: {
-          'luxcore-lib': '^v0.1.0',
+          'luxcore-lib': '^v0.13.7',
           'luxcore-node': '^v0.2.0'
         }
       };

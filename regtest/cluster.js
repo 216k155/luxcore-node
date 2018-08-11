@@ -23,7 +23,7 @@ describe('Bitcoin Cluster', function() {
   var nodesConf = [
     {
       datadir: path.resolve(__dirname, './data/node1'),
-      conf: path.resolve(__dirname, './data/node1/bitcoin.conf'),
+      conf: path.resolve(__dirname, './data/node1/lux.conf'),
       rpcuser: 'bitcoin',
       rpcpassword: 'local321',
       rpcport: 30521,
@@ -32,7 +32,7 @@ describe('Bitcoin Cluster', function() {
     },
     {
       datadir: path.resolve(__dirname, './data/node2'),
-      conf: path.resolve(__dirname, './data/node2/bitcoin.conf'),
+      conf: path.resolve(__dirname, './data/node2/lux.conf'),
       rpcuser: 'bitcoin',
       rpcpassword: 'local321',
       rpcport: 30522,
@@ -41,7 +41,7 @@ describe('Bitcoin Cluster', function() {
     },
     {
       datadir: path.resolve(__dirname, './data/node3'),
-      conf: path.resolve(__dirname, './data/node3/bitcoin.conf'),
+      conf: path.resolve(__dirname, './data/node3/lux.conf'),
       rpcuser: 'bitcoin',
       rpcpassword: 'local321',
       rpcport: 30523,
@@ -51,7 +51,7 @@ describe('Bitcoin Cluster', function() {
   ];
 
   before(function(done) {
-    log.info('Starting 3 bitcoind daemons');
+    log.info('Starting 3 luxd daemons');
     this.timeout(60000);
     async.each(nodesConf, function(nodeConf, next) {
       var opts = [
@@ -96,20 +96,20 @@ describe('Bitcoin Cluster', function() {
     }, 1000);
   });
 
-  it('step 1: will connect to three bitcoind daemons', function(done) {
+  it('step 1: will connect to three luxd daemons', function(done) {
     this.timeout(20000);
     var configuration = {
       network: 'regtest',
       services: [
         {
-          name: 'bitcoind',
+          name: 'luxd',
           module: BitcoinService,
           config: {
             connect: [
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30521,
-                rpcuser: 'bitcoin',
+                rpcuser: 'luxd',
                 rpcpassword: 'local321',
                 zmqpubrawtx: 'tcp://127.0.0.1:30611'
               },
@@ -156,7 +156,7 @@ describe('Bitcoin Cluster', function() {
 
   it('step 2: receive block events', function(done) {
     this.timeout(10000);
-    node.services.bitcoind.once('tip', function(height) {
+    node.services.luxd.once('tip', function(height) {
       height.should.equal(1);
       done();
     });

@@ -13,13 +13,13 @@ describe('#defaultConfig', function() {
       network: 'livenet',
       port: 3001,
       services: [
-        'bitcoind',
+        'luxd',
         'web'
       ],
       servicesConfig: {
-        bitcoind: {
+        luxd: {
           spawn: {
-            datadir: process.env.HOME + '/.luxcoin/data',
+            datadir: process.env.HOME + '/.bitcore/data',
             exec: expectedExecPath
           }
         }
@@ -29,7 +29,7 @@ describe('#defaultConfig', function() {
       fs: {
         existsSync: sinon.stub().returns(false),
         writeFileSync: function(path, data) {
-          path.should.equal(process.env.HOME + '/.luxcoin/luxcore-node.json');
+          path.should.equal(process.env.HOME + '/.bitcore/luxcore-node.json');
           data.should.equal(config);
         },
         readFileSync: function() {
@@ -42,29 +42,29 @@ describe('#defaultConfig', function() {
     });
     var home = process.env.HOME;
     var info = defaultConfig();
-    info.path.should.equal(home + '/.luxcoin');
+    info.path.should.equal(home + '/.bitcore');
     info.config.network.should.equal('livenet');
     info.config.port.should.equal(3001);
-    info.config.services.should.deep.equal(['bitcoind', 'web']);
-    var bitcoind = info.config.servicesConfig.bitcoind;
-    should.exist(bitcoind);
-    bitcoind.spawn.datadir.should.equal(home + '/.luxcoin/data');
-    bitcoind.spawn.exec.should.equal(expectedExecPath);
+    info.config.services.should.deep.equal(['luxd', 'web']);
+    var luxd = info.config.servicesConfig.luxd;
+    should.exist(luxd);
+    luxd.spawn.datadir.should.equal(home + '/.bitcore/data');
+    luxd.spawn.exec.should.equal(expectedExecPath);
   });
   it('will include additional services', function() {
     var config = JSON.stringify({
       network: 'livenet',
       port: 3001,
       services: [
-        'bitcoind',
+        'luxd',
         'web',
         'insight-api',
         'insight-ui'
       ],
       servicesConfig: {
-        bitcoind: {
+        luxd: {
           spawn: {
-            datadir: process.env.HOME + '/.luxcoin/data',
+            datadir: process.env.HOME + '/.bitcore/data',
             exec: expectedExecPath
           }
         }
@@ -74,7 +74,7 @@ describe('#defaultConfig', function() {
       fs: {
         existsSync: sinon.stub().returns(false),
         writeFileSync: function(path, data) {
-          path.should.equal(process.env.HOME + '/.luxcoin/luxcore-node.json');
+          path.should.equal(process.env.HOME + '/.bitcore/luxcore-node.json');
           data.should.equal(config);
         },
         readFileSync: function() {
@@ -89,18 +89,18 @@ describe('#defaultConfig', function() {
     var info = defaultConfig({
       additionalServices: ['insight-api', 'insight-ui']
     });
-    info.path.should.equal(home + '/.luxcoin');
+    info.path.should.equal(home + '/.bitcore');
     info.config.network.should.equal('livenet');
     info.config.port.should.equal(3001);
     info.config.services.should.deep.equal([
-      'bitcoind',
+      'luxd',
       'web',
       'insight-api',
       'insight-ui'
     ]);
-    var bitcoind = info.config.servicesConfig.bitcoind;
-    should.exist(bitcoind);
-    bitcoind.spawn.datadir.should.equal(home + '/.luxcoin/data');
-    bitcoind.spawn.exec.should.equal(expectedExecPath);
+    var luxd = info.config.servicesConfig.luxd;
+    should.exist(luxd);
+      luxd.spawn.datadir.should.equal(home + '/.bitcore/data');
+      luxd.spawn.exec.should.equal(expectedExecPath);
   });
 });

@@ -1,70 +1,89 @@
 Luxcore Node
 ============
 
-[![NPM Package](https://img.shields.io/npm/v/luxcore-node.svg?style=flat-square)](https://www.npmjs.org/package/luxcore-node)
-[![Build Status](https://img.shields.io/travis/216k155/luxcore-node.svg?branch=master&style=flat-square)](https://travis-ci.org/216k155/luxcore-node)
-[![Coverage Status](https://img.shields.io/coveralls/216k155/luxcore-node.svg?style=flat-square)](https://coveralls.io/r/216k155/luxcore-node)
+A LUX full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services.
 
-A Luxcoin full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Luxcoin Core with additional indexing](https://github.com/216k155/luxcore-luxcoin) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
+## Getting Started
 
-## Install
+1. Install nvm https://github.com/creationix/nvm  
 
-```bash
-npm install -g luxcore-node
-luxcore-node start
-```
+    ```bash
+    nvm i v6
+    nvm use v6
+    ```  
+2. Install mongo https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/  
 
-Note: For your convenience, we distribute bitcoind binaries for x86_64 Linux and x86_64 Mac OS X. Upon npm install, the binaries for your platform will be downloaded. For more detailed installation instructions, or if you want to compile the project yourself, then please see the Bitcore branch of [Luxcoin Core with additional indexing](https://github.com/216k155/luxcore-luxcoin).
+3. Install lux-bitcore https://github.com/216k155/lux-bitcore - with ZMQ !
 
-## Prerequisites
+    ```bash
+    # with ZMQ
+    sudo apt-get install libzmq3-dev 
+    ```  
+4. Install luxcore-node
 
-- GNU/Linux x86_32/x86_64, or OSX 64bit *(for bitcoind distributed binaries)*
-- Node.js v0.10, v0.12 or v4
-- ZeroMQ *(libzmq3-dev for Ubuntu/Debian or zeromq on OSX)*
-- ~200GB of disk storage
-- ~8GB of RAM
+    ```bash
+    npm i https://github.com/216k155/luxcore-node.git#master
 
-## Configuration
+    $(npm bin)/luxcore-node create mynode
 
-Luxcore includes a Command Line Interface (CLI) for managing, configuring and interfacing with your Luxcore Node.
+    cd mynode
 
-```bash
-luxcore-node create -d <bitcoin-data-dir> mynode
-cd mynode
-luxcore-node install <service>
-luxcore-node install https://github.com/yourname/helloworld
-```
+    ```  
+5. Edit luxcore-node.json
 
-This will create a directory with configuration files for your node and install the necessary dependencies. For more information about (and developing) services, please see the [Service Documentation](docs/services.md).
+    ```json
+    {
+      "network": "livenet",
+      "port": 3001,
+      "services": [
+	    "luxd",
+        "web"
+      ],
+      "servicesConfig": {
+        "luxd": {
+          "spawn": {
+            "datadir": "/home/user/.lux",
+            "exec": "/home/user/lux-bitcore/src/luxd"
+          }
+        }
+      }
+	}
+    ```  
+6. Edit lux.conf
+
+    ```
+    server=1
+    whitelist=127.0.0.1
+    txindex=1
+    addressindex=1
+    timestampindex=1
+    spentindex=1
+    zmqpubrawtx=tcp://127.0.0.1:28332
+    zmqpubhashblock=tcp://127.0.0.1:28332
+    rpcallowip=127.0.0.1
+    rpcuser=user
+    rpcpassword=password
+    rpcport=9888
+    reindex=1
+    gen=0
+    addrindex=1
+    logevents=1
+    ```  
+7. Run Node  
+
+    ```
+    $(npm bin)/luxcore-node start
+    ```  
 
 ## Add-on Services
 
-There are several add-on services available to extend the functionality of Bitcore:
+There are several add-on services available to extend the functionality of Luxcore:
 
-- [Insight API](https://github.com/bitpay/insight-api)
-- [Insight UI](https://github.com/bitpay/insight-ui)
-- [Bitcore Wallet Service](https://github.com/bitpay/bitcore-wallet-service)
-
-## Documentation
-
-- [Upgrade Notes](docs/upgrade.md)
-- [Services](docs/services.md)
-  - [Bitcoind](docs/services/bitcoind.md) - Interface to Bitcoin Core
-  - [Web](docs/services/web.md) - Creates an express application over which services can expose their web/API content
-- [Development Environment](docs/development.md) - Guide for setting up a development environment
-- [Node](docs/node.md) - Details on the node constructor
-- [Bus](docs/bus.md) - Overview of the event bus constructor
-- [Release Process](docs/release.md) - Information about verifying a release and the release process.
+- [LUX Insight API](https://github.com/216k155/insight-api)
+- [LUX Explorer](https://github.com/216k155/lux-explorer)
 
 ## Contributing
 
-Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/216k155/luxcore/blob/master/CONTRIBUTING.md) file.
+
 
 ## License
-
-Code released under [the MIT license](https://github.com/216k155/luxcore-node/blob/master/LICENSE).
-
-Copyright 2016 The Luxcoin Core Developers
-
-- bitcore: Copyright (c) 2013-2015 BitPay, Inc. (MIT License)
-- bitcoin: Copyright (c) 2009-2015 Bitcoin Core Developers (MIT License)
