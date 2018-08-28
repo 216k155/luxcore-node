@@ -5,18 +5,18 @@ set -e
 root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 platform=`uname -a | awk '{print tolower($1)}'`
 arch=`uname -m`
-version="0.12.1"
-url="https://github.com/bitpay/bitcoin/releases/download"
-tag="v0.12.1-bitcore-4"
+version="5.3.0"
+url="https://github.com/heidi-dang/lux/releases/download"
+tag="v5.3.0"
 
 if [ "${platform}" == "linux" ]; then
     if [ "${arch}" == "x86_64" ]; then
-        tarball_name="bitcoin-${version}-linux64.tar.gz"
+        tarball_name="lux-${version}-x86_64-linux-gnu.tar.gz"
     elif [ "${arch}" == "x86_32" ]; then
-        tarball_name="bitcoin-${version}-linux32.tar.gz"
+        tarball_name="lux-${version}-linux32.tar.gz"
     fi
 elif [ "${platform}" == "darwin" ]; then
-    tarball_name="bitcoin-${version}-osx64.tar.gz"
+    tarball_name="lux-${version}-osx64.tar.gz"
 else
     echo "Bitcoin binary distribution not available for platform and architecture"
     exit -1
@@ -51,7 +51,7 @@ download_bitcoind() {
             echo "Unpacking bitcoin distribution"
             tar -xvzf $tarball_name
             if test $? -eq 0; then
-                ln -sf "bitcoin-${version}/bin/bitcoind"
+                ln -sf "lux-${version}/bin/luxd"
                 return;
             fi
         fi
