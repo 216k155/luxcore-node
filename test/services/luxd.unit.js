@@ -923,7 +923,7 @@ describe('Lux Service', function() {
 				}
 			};
 			var luxd = new LuxService(config);
-			luxd._getDefaultConf().rpcport.should.equal(8332);
+			luxd._getDefaultConf().rpcport.should.equal(9888);
 		});
 		it('will get default rpc port for testnet', function() {
 			var config = {
