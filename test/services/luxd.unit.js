@@ -936,7 +936,7 @@ describe('Lux Service', function() {
 				}
 			};
 			var luxd = new LuxService(config);
-			luxd._getDefaultConf().rpcport.should.equal(9888);
+			luxd._getDefaultConf().rpcport.should.equal(9777);
 		});
 		it('will get default rpc port for regtest', function() {
 			luxcore.Networks.enableRegtest();
@@ -950,7 +950,7 @@ describe('Lux Service', function() {
 				}
 			};
 			var luxd = new LuxService(config);
-			luxd._getDefaultConf().rpcport.should.equal(9888);
+			luxd._getDefaultConf().rpcport.should.equal(9666);
 		});
 	});
 
