@@ -7389,20 +7389,20 @@ describe('Lux Service', function() {
 		});
 	});
 
-	describe('#getStakingInfo', function() {
+	describe('#getStakingStatus', function() {
 		it('will give rpc error', function(done) {
 			var luxd = new LuxService(baseConfig);
 			sinon.spy(luxd, '_tryAllClients');
-			var getStakingInfo = sinon.stub().callsArgWith(0, { message: 'Test error', code: -1 });
+			var getStakingStatus = sinon.stub().callsArgWith(0, { message: 'Test error', code: -1 });
 			luxd.nodes.push({
 				client: {
-					getStakingInfo: getStakingInfo,
+					getStakingStatus: getStakingStatus,
 				}
 			});
-			luxd.getStakingInfo(function(err, result) {
+			luxd.getStakingStatus(function(err, result) {
 				should.exist(err);
 				luxd._tryAllClients.callCount.should.equal(1);
-				getStakingInfo.callCount.should.equal(1);
+				getStakingStatus.callCount.should.equal(1);
 				err.should.be.an.instanceof(errors.RPCError);
 				done();
 			});
@@ -7424,18 +7424,18 @@ describe('Lux Service', function() {
 
 			var luxd = new LuxService(baseConfig);
 			sinon.spy(luxd, '_tryAllClients');
-			var getStakingInfo = sinon.stub().callsArgWith(0, null, {
+			var getStakingStatus = sinon.stub().callsArgWith(0, null, {
 				result: stakingInfo,
 			});
 			luxd.nodes.push({
 				client: {
-					getStakingInfo: getStakingInfo,
+					getStakingStatus: getStakingStatus,
 				}
 			});
-			luxd.getStakingInfo(function(err, result) {
+			luxd.getStakingStatus(function(err, result) {
 				should.not.exist(err);
 				luxd._tryAllClients.callCount.should.equal(1);
-				getStakingInfo.callCount.should.equal(1);
+				getStakingStatus.callCount.should.equal(1);
 				result.should.deep.equal(stakingInfo);
 				done();
 			});
@@ -7457,22 +7457,22 @@ describe('Lux Service', function() {
 
 			var luxd = new LuxService(baseConfig);
 			sinon.spy(luxd, '_tryAllClients');
-			var getStakingInfo = sinon.stub().callsArgWith(0, null, {
+			var getStakingStatus = sinon.stub().callsArgWith(0, null, {
 				result: stakingInfo,
 			});
 			luxd.nodes.push({
 				client: {
-					getStakingInfo: getStakingInfo,
+					getStakingStatus: getStakingStatus,
 				}
 			});
-			luxd.getStakingInfo(function(err, result) {
+			luxd.getStakingStatus(function(err, result) {
 				should.not.exist(err);
-				getStakingInfo.callCount.should.equal(1);
+				getStakingStatus.callCount.should.equal(1);
 				luxd._tryAllClients.callCount.should.equal(1);
-				luxd.getStakingInfo(function(err, result) {
+				luxd.getStakingStatus(function(err, result) {
 					should.not.exist(err);
 					luxd._tryAllClients.callCount.should.equal(1);
-					getStakingInfo.callCount.should.equal(1);
+					getStakingStatus.callCount.should.equal(1);
 					result.should.deep.equal(stakingInfo);
 					done();
 				});
